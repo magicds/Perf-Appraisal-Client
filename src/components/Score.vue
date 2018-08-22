@@ -3,7 +3,7 @@
   切换身份
   <el-switch v-model="isAdmin" @change="onRoleChange">
   </el-switch>
-  <el-table :data="data" style="width: 100%">
+  <el-table :data="data" style="width: 100%" default-expand-all="true">
 
     <el-table-column type="expand">
       <template slot-scope="props">
