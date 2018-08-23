@@ -3,7 +3,7 @@
   切换身份
   <el-switch v-model="isAdmin" @change="onRoleChange">
   </el-switch>
-  <el-table :data="data" style="width: 100%" default-expand-all="true">
+  <el-table :data="data" style="width: 100%" :default-expand-all="defaultExpandAll">
 
     <el-table-column type="expand">
       <template slot-scope="props">
@@ -13,8 +13,8 @@
           <el-table-column label="分值" prop="maxScore" align="left"></el-table-column>
           <el-table-column label="得分" prop="score" align="center">
             <template slot-scope="scope">
-              <!-- <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
-              <!-- <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button> -->
+              <!-- <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button> -->
               <el-input-number v-if="isAdmin" v-model="scope.row.score" controls-position="right" @change="detailScoreChanged(props.$index, scope.$index)"
                 :min="0" :max="scope.row.maxScore"></el-input-number>
               <span v-else>{{scope.row.score}}</span>
@@ -36,10 +36,11 @@
 </template>
 
 <script>
-import { Table, TableColumn, InputNumber, Switch } from 'element-ui';
+import { Table, TableColumn, InputNumber, Switch, Button } from 'element-ui';
 export default {
   name:'Score',
   components: {
+    ElButton: Button,
     ElTable: Table,
     ElTableColumn: TableColumn,
     ElInputNumber: InputNumber,
@@ -68,7 +69,8 @@ export default {
         }
         return arr;
       })(),
-      isAdmin: true
+      isAdmin: true,
+      defaultExpandAll:true
     };
   },
   methods: {
