@@ -58,6 +58,7 @@ export default {
           .then(res => {
             console.log(res.data);
             this.loading = false;
+            this.$router.push('score');
           })
           .catch(err => {
             console.log(err.response);
